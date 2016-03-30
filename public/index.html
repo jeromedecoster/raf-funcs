@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>raf-funcs</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png">
+    <style type="text/css">
+      body { margin: 30px; }
+      .card {
+        display: inline-block;
+        padding: 10px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        background-color: #eee;
+        width: 250px; 
+        vertical-align: top;
+      } 
+      input { font-size: 24px; outline: none; display: block; width: 100%; }
+      button { font-size: 18px; margin-top: 10px; }
+    </style>
+  </head>
+  <body>
+    <div class="card timeout">
+      <h3>timeout</h3>
+      <input  class="delay" type="number" min="0" max="3000" step="250" value="1000"/>
+      <button class="start">start</button>
+      <button class="clear">clear</button>
+      <p class="output">...</p>
+    </div>
+    <div class="card interval">
+      <h3>interval</h3>
+      <input  class="delay" type="number" min="0" max="3000" step="250" value="1000"/>
+      <button class="start">start</button>
+      <button class="clear">clear</button>
+      <p class="output">...</p>
+    </div>
+    <br>
+    <div class="card throttle">
+      <h3>throttle</h3>
+      <p>resize event</p>
+      <p class="output1">...</p>
+      <input  class="delay" type="number" min="0" max="3000" step="250" value="500"/>
+      <button class="add">add</button>
+      <button class="remove">remove</button>
+      <p>throttled event</p>
+      <p class="output2">...</p>
+    </div>
+    <div class="card debounce">
+      <h3>debounce</h3>
+      <input  class="input" type="text"/>
+      <p>keyup event</p>
+      <p class="output1">...</p>
+      <input  class="delay" type="number" min="0" max="3000" step="250" value="500"/>
+      <button class="add">add</button>
+      <button class="remove">remove</button>
+      <p>debounced event</p>
+      <p class="output2">...</p>
+    </div>
+    
+    <script src="bundle.js"></script>
+  </body>
+</html>
