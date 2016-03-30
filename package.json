@@ -1,9 +1,20 @@
 {
   "name": "raf-funcs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A very limited subset of requestAnimationFrame functions I use every day",
   "repository": "jeromedecoster/raf-funcs",
   "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "raf",
+    "requestAnimationFrame",
+    "timeout",
+    "interval",
+    "throttle",
+    "debounce"
+  ],
   "scripts": {
     "start": "browser-sync start --server public --no-ui --no-notify",
     "dev": "node scripts/dev",

@@ -30,6 +30,8 @@ var ref = timeout(function() {
 // clear(ref)
 ```
 
+---
+
 #### interval(cb, delay, [ctx])
 
 | Argument | Action |
@@ -49,6 +51,8 @@ var ref = interval(function() {
 // uncomment to cancel the interval
 // clear(ref)
 ```
+
+---
 
 #### throttle(cb, delay, [ctx])
 
@@ -70,6 +74,8 @@ window.addEventListener('resize', throttled)
 // uncomment to cancel the throttle
 // throttled.cancel()
 ```
+
+---
 
 #### debounce(cb, delay, [ctx])
 
