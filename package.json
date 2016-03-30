@@ -1,0 +1,12 @@
+{
+  "name": "raf-funcs",
+  "version": "0.0.0",
+  "description": "raf-funcs module",
+  "repository": "jeromedecoster/raf-func",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
