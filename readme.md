@@ -56,6 +56,8 @@ var ref = interval(function() {
 
 #### throttle(cb, delay, [ctx])
 
+Throttle a function with `cancel` and `immediate` methods
+
 | Argument | Action |
 | :------ | :------- |
 | **cb** | the callback |
@@ -73,11 +75,16 @@ window.addEventListener('resize', throttled)
 
 // uncomment to cancel the throttle
 // throttled.cancel()
+
+// uncomment to call it immediately
+// throttled.immediate()
 ```
 
 ---
 
 #### debounce(cb, delay, [ctx])
+
+Debounce a function with `cancel` and `immediate` methods
 
 | Argument | Action |
 | :------ | :------- |
@@ -96,6 +103,9 @@ input.addEventListener('keyup', debounced)
 
 // uncomment to cancel the debounce
 // debounced.cancel()
+
+// uncomment to call it immediately
+// debounced.immediate()
 ```
 
 ## Thanks

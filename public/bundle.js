@@ -54,6 +54,12 @@ function throttle(cb, delay, ctx) {
   	  data.id = requestAnimationFrame(loop)
   	}
   }
+
+  throttled.immediate = function() {
+    clear(data)
+    delayed()
+  }
+
   throttled.cancel = function() {
     clear(data)
   }
@@ -87,6 +93,11 @@ function debounce(cb, delay, ctx) {
     data.id = requestAnimationFrame(loop)
   }
 
+  debounced.immediate = function() {
+    clear(data)
+    delayed()
+  }
+
   debounced.cancel = function() {
     clear(data)
   }
@@ -115,10 +126,6 @@ function safe(delay) {
   if (typeof delay != 'number' || delay !== delay) return 0
   return delay < 0 ? 0 : delay
 }
-
-// https://jsperf.com/new-date-vs-date-now-vs-performance-now/37
-// http://jsperf.com/new-object-vs-object-create-vs/2
-// http://jacksondunstan.com/articles/983
 
 },{}],2:[function(require,module,exports){
 
@@ -182,23 +189,33 @@ intervalClear.addEventListener('click', function() {
 // THROTTLE
 //
 
-var throttleDelay   = document.querySelector('.throttle .delay')
-var throttleAdd     = document.querySelector('.throttle .add')
-var throttleRemove  = document.querySelector('.throttle .remove')
-var throttleOutput1 = document.querySelector('.throttle .output1')
-var throttleOutput2 = document.querySelector('.throttle .output2')
+var throttleDelay     = document.querySelector('.throttle .delay')
+var throttleAdd       = document.querySelector('.throttle .add')
+var throttleRemove    = document.querySelector('.throttle .remove')
+var throttleImmediate = document.querySelector('.throttle .immediate')
+var throttleOutput1   = document.querySelector('.throttle .output1')
+var throttleOutput2   = document.querySelector('.throttle .output2')
 var throttled
 
 throttleAdd.addEventListener('click', function() {
 	throttleOutput2.textContent = 'add'
+  if (throttled) {
+    throttled.cancel()
+    window.removeEventListener('resize', throttled)
+  }
 	throttled = throttle(function() {
   		throttleOutput2.innerHTML = time() + ' &nbsp; &nbsp; &nbsp; ' + window.innerWidth + ' x ' + window.innerHeight
 	}, +throttleDelay.value)
+  console.log('val:', +throttleDelay.value)
 	window.addEventListener('resize', throttled, false)
 })
 throttleRemove.addEventListener('click', function() {
 	throttleOutput2.textContent = 'remove'
 	window.removeEventListener('resize', throttled)
+})
+throttleImmediate.addEventListener('click', function() {
+  throttleOutput2.textContent = 'immediate'
+  throttled.immediate()
 })
 
 window.addEventListener('resize', function() {
@@ -209,16 +226,21 @@ window.addEventListener('resize', function() {
 // DEBOUNCE
 //
 
-var debounceInput   = document.querySelector('.debounce .input')
-var debounceDelay   = document.querySelector('.debounce .delay')
-var debounceAdd     = document.querySelector('.debounce .add')
-var debounceRemove  = document.querySelector('.debounce .remove')
-var debounceOutput1 = document.querySelector('.debounce .output1')
-var debounceOutput2 = document.querySelector('.debounce .output2')
+var debounceInput     = document.querySelector('.debounce .input')
+var debounceDelay     = document.querySelector('.debounce .delay')
+var debounceAdd       = document.querySelector('.debounce .add')
+var debounceRemove    = document.querySelector('.debounce .remove')
+var debounceImmediate = document.querySelector('.debounce .immediate')
+var debounceOutput1   = document.querySelector('.debounce .output1')
+var debounceOutput2   = document.querySelector('.debounce .output2')
 var debounced
 
 debounceAdd.addEventListener('click', function() {
 	debounceOutput2.textContent = 'add'
+  if (debounced) {
+    debounced.cancel()
+    window.removeEventListener('keyup', debounced)
+  }
 	debounced = debounce(function() {
   		debounceOutput2.innerHTML = debounceInner(this)
 	}, +debounceDelay.value, debounceInput)
@@ -228,7 +250,10 @@ debounceRemove.addEventListener('click', function() {
 	debounceOutput2.textContent = 'remove'
 	window.removeEventListener('keyup', debounced)
 })
-
+debounceImmediate.addEventListener('click', function() {
+  debounceOutput2.textContent = 'immediate'
+  debounced.immediate()
+})
 debounceInput.addEventListener('keyup', function() {
 	debounceOutput1.innerHTML = debounceInner(this)
 })

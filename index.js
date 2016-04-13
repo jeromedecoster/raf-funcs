@@ -53,6 +53,12 @@ function throttle(cb, delay, ctx) {
   	  data.id = requestAnimationFrame(loop)
   	}
   }
+
+  throttled.immediate = function() {
+    clear(data)
+    delayed()
+  }
+
   throttled.cancel = function() {
     clear(data)
   }
@@ -86,6 +92,11 @@ function debounce(cb, delay, ctx) {
     data.id = requestAnimationFrame(loop)
   }
 
+  debounced.immediate = function() {
+    clear(data)
+    delayed()
+  }
+
   debounced.cancel = function() {
     clear(data)
   }
@@ -111,6 +122,7 @@ function clear(data) {
 }
 
 function safe(delay) {
-  if (typeof delay != 'number' || delay !== delay) return 0
-  return delay < 0 ? 0 : delay
+  return (delay == undefined || typeof delay != 'number' || delay !== delay || delay < 0)
+    ? 0
+    : delay
 }
