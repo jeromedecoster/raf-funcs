@@ -1,30 +1,39 @@
 {
   "name": "raf-funcs",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A very limited subset of requestAnimationFrame functions I use every day",
   "repository": "jeromedecoster/raf-funcs",
   "main": "index.js",
   "files": [
-    "index.js"
+    "clear.js",
+    "debounce.js",
+    "index.js",
+    "interval.js",
+    "throttle.js",
+    "timeout.js"
   ],
   "keywords": [
+    "debounce",
+    "interval",
     "raf",
     "requestAnimationFrame",
-    "timeout",
-    "interval",
     "throttle",
-    "debounce"
+    "timeout"
   ],
+  "author": {
+    "name": "Jérôme Decoster",
+    "url": "http://jeromedecoster.com"
+  },
+  "license": "MIT",
   "scripts": {
-    "start": "browser-sync start --server public --no-ui --no-notify",
-    "dev": "node scripts/dev",
+    "start": "budo src/index.js:bundle.js --dir src --host localhost --port 3000 --no-debug --open",
+    "dev": "budo src/index.js:bundle.js --dir src --host localhost --port 3000 --no-debug --live",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "browser-sync": "^2.11.2",
-    "browserify": "^13.0.0",
-    "watchify": "^3.7.0"
+    "budo": "^8.3.0"
   },
-  "author": "",
-  "license": "MIT"
+  "dependencies": {
+    "is-funcs": "^0.2.1"
+  }
 }

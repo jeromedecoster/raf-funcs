@@ -8,9 +8,28 @@
 npm i raf-funcs
 ```
 
+Package [on npm](https://www.npmjs.com/package/raf-funcs)
+
+## require
+
+```js
+// require all functions
+const throttle = require('raf-funcs').throttle
+
+// require only the single function (recommanded)
+const throttle = require('raf-funcs/throttle')
+```
+
 ## API
 
-#### timeout(cb, delay, [ctx])
+* [debounce](#debouncecb-delay-ctx)
+* [interval](#intervalcb-delay-ctx)
+* [throttle](#throttlecb-delay-ctx)
+* [timeout](#timeoutcb-delay-ctx)
+
+#### debounce(cb, delay, [ctx])
+
+Debounce a function with `cancel` and `immediate` methods
 
 | Argument | Action |
 | :------ | :------- |
@@ -19,21 +38,27 @@ npm i raf-funcs
 | **ctx** | the context of `this`|
 
 ```js
-const timeout = require('raf-funcs').timeout
-const clear = require('raf-funcs').clear
+const debounce = require('raf-funcs/debounce')
 
-var ref = timeout(function() {
-  console.log('1 second later')
-}, 1000)
+var debounced = debounce(function() {
+  console.log('250 ms after the last keyup')
+}, 250)
 
-// uncomment to cancel the timeout
-// clear(ref)
+input.addEventListener('keyup', debounced)
+
+// uncomment to cancel the debounce
+// debounced.cancel()
+
+// uncomment to call it immediately
+// debounced.immediate()
 ```
 
 ---
 
 #### interval(cb, delay, [ctx])
 
+Like `setInterval` but based on `requestAnimationFrame`
+
 | Argument | Action |
 | :------ | :------- |
 | **cb** | the callback |
@@ -41,8 +66,8 @@ var ref = timeout(function() {
 | **ctx** | the context of `this`|
 
 ```js
-const interval = require('raf-funcs').interval
-const clear = require('raf-funcs').clear
+const interval = require('raf-funcs/interval')
+const clear = require('raf-funcs/clear')
 
 var ref = interval(function() {
   console.log('every second')
@@ -65,7 +90,7 @@ Throttle a function with `cancel` and `immediate` methods
 | **ctx** | the context of `this`|
 
 ```js
-const throttle = require('raf-funcs').throttle
+const throttle = require('raf-funcs/throttle')
 
 var throttled = throttle(function() {
   console.log('after the first resize, then after each 250 ms elapsed')
@@ -82,9 +107,9 @@ window.addEventListener('resize', throttled)
 
 ---
 
-#### debounce(cb, delay, [ctx])
+#### timeout(cb, delay, [ctx])
 
-Debounce a function with `cancel` and `immediate` methods
+Like `setTimeout` but based on `requestAnimationFrame`
 
 | Argument | Action |
 | :------ | :------- |
@@ -93,19 +118,15 @@ Debounce a function with `cancel` and `immediate` methods
 | **ctx** | the context of `this`|
 
 ```js
-const debounce = require('raf-funcs').debounce
+const timeout = require('raf-funcs/timeout')
+const clear = require('raf-funcs/clear')
 
-var debounced = debounce(function() {
-  console.log('250 ms after the last keyup')
-}, 250)
+var ref = timeout(function() {
+  console.log('1 second later')
+}, 1000)
 
-input.addEventListener('keyup', debounced)
-
-// uncomment to cancel the debounce
-// debounced.cancel()
-
-// uncomment to call it immediately
-// debounced.immediate()
+// uncomment to cancel the timeout
+// clear(ref)
 ```
 
 ## Thanks

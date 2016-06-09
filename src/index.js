@@ -1,9 +1,8 @@
-
-const timeout  = require('..').timeout
-const interval = require('..').interval
-const throttle = require('..').throttle
-const debounce = require('..').debounce
-const clear    = require('..').clear
+const interval = require('../interval')
+const debounce = require('../debounce')
+const throttle = require('../throttle')
+const timeout  = require('../timeout')
+const clear    = require('../clear')
 
 //
 // TIMEOUT
@@ -63,6 +62,7 @@ var throttleDelay     = document.querySelector('.throttle .delay')
 var throttleAdd       = document.querySelector('.throttle .add')
 var throttleRemove    = document.querySelector('.throttle .remove')
 var throttleImmediate = document.querySelector('.throttle .immediate')
+var throttleCancel    = document.querySelector('.throttle .cancel')
 var throttleOutput1   = document.querySelector('.throttle .output1')
 var throttleOutput2   = document.querySelector('.throttle .output2')
 var throttled
@@ -76,7 +76,6 @@ throttleAdd.addEventListener('click', function() {
 	throttled = throttle(function() {
   		throttleOutput2.innerHTML = time() + ' &nbsp; &nbsp; &nbsp; ' + window.innerWidth + ' x ' + window.innerHeight
 	}, +throttleDelay.value)
-  console.log('val:', +throttleDelay.value)
 	window.addEventListener('resize', throttled, false)
 })
 throttleRemove.addEventListener('click', function() {
@@ -86,6 +85,10 @@ throttleRemove.addEventListener('click', function() {
 throttleImmediate.addEventListener('click', function() {
   throttleOutput2.textContent = 'immediate'
   throttled.immediate()
+})
+throttleCancel.addEventListener('click', function() {
+  throttleOutput2.textContent = 'cancel'
+  throttled.cancel()
 })
 
 window.addEventListener('resize', function() {
@@ -101,6 +104,7 @@ var debounceDelay     = document.querySelector('.debounce .delay')
 var debounceAdd       = document.querySelector('.debounce .add')
 var debounceRemove    = document.querySelector('.debounce .remove')
 var debounceImmediate = document.querySelector('.debounce .immediate')
+var debounceCancel    = document.querySelector('.debounce .cancel')
 var debounceOutput1   = document.querySelector('.debounce .output1')
 var debounceOutput2   = document.querySelector('.debounce .output2')
 var debounced
@@ -123,6 +127,10 @@ debounceRemove.addEventListener('click', function() {
 debounceImmediate.addEventListener('click', function() {
   debounceOutput2.textContent = 'immediate'
   debounced.immediate()
+})
+debounceCancel.addEventListener('click', function() {
+  debounceOutput2.textContent = 'cancel'
+  debounced.cancel()
 })
 debounceInput.addEventListener('keyup', function() {
 	debounceOutput1.innerHTML = debounceInner(this)
