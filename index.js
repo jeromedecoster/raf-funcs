@@ -1,5 +1,0 @@
-exports.debounce = require('./debounce')
-exports.interval = require('./interval')
-exports.throttle = require('./throttle')
-exports.timeout  = require('./timeout')
-exports.clear    = require('./clear')

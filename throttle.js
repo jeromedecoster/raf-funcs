@@ -1,8 +1,8 @@
-const isGte = require('is-funcs/is-gte')
+const setNumber = require('set-funcs/set-number')
 const clear = require('./clear')
 
 module.exports = function(cb, delay, ctx) {
-  delay = isGte(delay, 0) ? delay : 0
+  delay = setNumber(delay, 0)
   var start = 0
   var data = {}
   var args

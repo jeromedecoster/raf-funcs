@@ -10,16 +10,6 @@ npm i raf-funcs
 
 Package [on npm](https://www.npmjs.com/package/raf-funcs)
 
-## require
-
-```js
-// require all functions
-const throttle = require('raf-funcs').throttle
-
-// require only the single function (recommanded)
-const throttle = require('raf-funcs/throttle')
-```
-
 ## API
 
 * [debounce](#debouncecb-delay-ctx)
