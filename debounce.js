@@ -2,7 +2,7 @@ const setNumber = require('set-funcs/set-number')
 const clear = require('./clear')
 
 module.exports = function(cb, delay, ctx) {
-  delay = setNumber(delay, 0)
+  delay = setNumber(delay)
   var start = 0
   var data = {}
   var args

@@ -1,7 +1,7 @@
 const setNumber = require('set-funcs/set-number')
 
 module.exports = function(cb, delay, ctx) {
-  delay = setNumber(delay, 0)
+  delay = setNumber(delay)
   if (ctx == undefined) ctx = this
   var start = Date.now()
   var data = {
