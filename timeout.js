@@ -1,17 +1,22 @@
-const setNumber = require('set-funcs/set-number')
+const interval = require('./interval')
 
 module.exports = function(cb, delay, ctx) {
-  delay = setNumber(delay)
-  if (ctx === undefined) ctx = this
-  var start = Date.now()
-  var data = {
-    id: requestAnimationFrame(loop)
+  if (ctx === undefined || ctx === null) ctx = this
+
+  function wrap(elapsed) {
+    cb.call(ctx, elapsed)
   }
+  var ref = interval(wrap, delay, ctx, 1)
 
-  return data
-
-  function loop() {
-    if (Date.now() - start >= delay) return cb.call(ctx)
-    data.id = requestAnimationFrame(loop)
+  return {
+    get started() {
+      return ref.started
+    },
+    start: function() {
+      ref.start()
+    },
+    cancel: function() {
+      ref.cancel()
+    }
   }
 }

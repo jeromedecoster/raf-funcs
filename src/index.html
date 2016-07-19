@@ -17,21 +17,43 @@
       }
       input  { font-size: 24px; outline: none; display: block; width: 100%; }
       button { font-size: 18px; outline: none; margin-top: 10px; }
+      .flex {
+        display: flex;
+      }
+      .flex span {
+        margin: 7px 5px 0 10px;
+      }
+      .flex span:first-child {
+        margin-left:  0;
+      }
+      .flex .delay {
+        width: 80px;
+      }
+      .flex .count {
+        width: 70px;
+      }
     </style>
   </head>
   <body>
     <div class="card timeout">
       <h3>timeout</h3>
       <input  class="delay" type="number" min="0" max="3000" step="250" value="1000"/>
+      <button class="create">create</button>
       <button class="start">start</button>
-      <button class="clear">clear</button>
+      <button class="cancel">cancel</button>
       <p class="output">...</p>
     </div>
     <div class="card interval">
       <h3>interval</h3>
-      <input  class="delay" type="number" min="0" max="3000" step="250" value="1000"/>
+      <div class="flex">
+        <span>delay:</span>
+        <input class="delay" type="number" min="0" max="3000" step="250" value="1000"/>
+        <span>count:</span>
+        <input class="count" type="number" min="-1" max="30" step="1" value="3"/>
+      </div>
+      <button class="create">create</button>
       <button class="start">start</button>
-      <button class="clear">clear</button>
+      <button class="cancel">cancel</button>
       <p class="output">...</p>
     </div>
     <br>
@@ -39,7 +61,7 @@
       <h3>throttle</h3>
       <p>resize event</p>
       <p class="output1">...</p>
-      <input  class="delay" type="number" min="0" max="3000" step="250" value="500"/>
+      <input  class="delay" type="number" min="0" max="3000" step="250" value="2000"/>
       <button class="add">add</button>
       <button class="remove">remove</button>
       <button class="immediate">immediate</button>
@@ -52,7 +74,7 @@
       <input  class="input" type="text"/>
       <p>keyup event</p>
       <p class="output1">...</p>
-      <input  class="delay" type="number" min="0" max="3000" step="250" value="500"/>
+      <input  class="delay" type="number" min="-250" max="3000" step="250" value="2000"/>
       <button class="add">add</button>
       <button class="remove">remove</button>
       <button class="immediate">immediate</button>

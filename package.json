@@ -1,10 +1,9 @@
 {
   "name": "raf-funcs",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "A very limited subset of requestAnimationFrame functions I use every day",
   "repository": "jeromedecoster/raf-funcs",
   "files": [
-    "clear.js",
     "debounce.js",
     "interval.js",
     "throttle.js",
@@ -32,6 +31,6 @@
     "budo": "^8.3.0"
   },
   "dependencies": {
-    "set-funcs": "^0.1.0"
+    "set-funcs": "^0.1.1"
   }
 }

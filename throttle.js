@@ -1,39 +1,42 @@
 const setNumber = require('set-funcs/set-number')
-const clear = require('./clear')
 
 module.exports = function(cb, delay, ctx) {
-  delay = setNumber(delay)
-  var start = 0
-  var data = {}
+  delay = setNumber(delay, 50, 25)
+  var id
   var args
+  var start = 0
 
-  function throttled() {
-    if (data.id == null) {
-      if (ctx === undefined) ctx = this
-      args = arguments
-      data.id = requestAnimationFrame(loop)
-    }
+  function throttle() {
+    if (id != null) return
+    if (ctx === undefined || ctx === null) ctx = this
+    args = arguments
+    id = requestAnimationFrame(loop)
   }
 
-  throttled.immediate = function() {
-    clear(data)
+  throttle.immediate = function() {
+    cancel()
     delayed()
   }
 
-  throttled.cancel = function() {
-    clear(data)
+  throttle.cancel = function() {
+    cancel()
   }
 
-  return throttled
+  return throttle
 
   function loop() {
     if (delay - (Date.now() - start) <= 0) return delayed()
-    data.id = requestAnimationFrame(loop)
+    id = requestAnimationFrame(loop)
   }
 
   function delayed() {
     start = Date.now()
-    data.id = null
+    id = null
     cb.apply(ctx, args)
+  }
+
+  function cancel() {
+    cancelAnimationFrame(id)
+    id = null
   }
 }
